@@ -1,0 +1,8 @@
+[
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/janroe.cordero/Developer/nuxt-mastery/nuxtbnb/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]
