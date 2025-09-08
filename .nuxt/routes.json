@@ -3,14 +3,12 @@
     "name": "index",
     "path": "/",
     "component": "/Users/janroe.cordero/Developer/nuxt-mastery/nuxtbnb/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_96054924"
+    "chunkName": "pages/index"
   },
   {
     "name": "home-id",
     "path": "/home/:id?",
     "component": "/Users/janroe.cordero/Developer/nuxt-mastery/nuxtbnb/pages/home/_id.vue",
-    "chunkName": "pages/home/_id",
-    "_name": "_f63edac4"
+    "chunkName": "pages/home/_id"
   }
 ]
