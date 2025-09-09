@@ -1,6 +1,7 @@
 {
-  "name": "nuxt-bnb", 
+  "name": "nuxt-bnb",
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.10",
     "nuxt": "2.18.1"
   },
   "scripts": {
