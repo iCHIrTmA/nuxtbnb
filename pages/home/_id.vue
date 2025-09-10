@@ -10,6 +10,12 @@
         {{ home.guests }} guests, {{ home.bedrooms }} rooms, {{ home.beds }} beds, {{ home.bathrooms }} bath<br/>
         {{ home.description }}
         <div style="height:800px;width:800px;" ref="map"></div>
+        <div v-for="review in reviews" :key="review.objectID">
+            <img :src="review.reviewer.image" /> <br />
+            {{ review.reviewer.name }} <br />
+            {{ review.date }} <br />
+            {{ review.comment }} <br />
+        </div>
     </div>
 </template>
 
@@ -22,12 +28,21 @@ export default {
         }
     },
     async asyncData({ params, $dataApi, error }) {
-        const response = await $dataApi.getHome(params.id)
-        if (! response.ok) {
-            return error({ statusCode: response.status, message: response.statusText })
+        const homePropertyResponse = await $dataApi.getHome(params.id)
+        if (! homePropertyResponse.ok) {
+            return error({ statusCode: homePropertyResponse.status, message: homePropertyResponse.statusText })
+        }
+        const guestReviewsResponse = await $dataApi.getReviewsByHomeId(params.id)
+        console.log('asyncData', guestReviewsResponse);
+        console.log('asyncData', guestReviewsResponse.json);
+        console.log('asyncData', guestReviewsResponse.json.hits);
+        if (! guestReviewsResponse.ok) {
+            console.error(guestReviewsResponse)
+            return error({ statusCode: guestReviewsResponse.status, message: guestReviewsResponse.statusText })
         }
         return {
-            home: response.json
+            home: homePropertyResponse.json,
+            reviews: guestReviewsResponse.json.hits,
         }
     },
     mounted() {
