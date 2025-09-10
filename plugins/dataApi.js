@@ -25,7 +25,9 @@ export default function (context, inject) {
                 headers,
                 method: 'POST',
                 body: JSON.stringify({
-                    filters: `homeId:${homeId}` 
+                    filters: `homeId:${homeId}`,
+                    hitsPerPage: 6,
+                    attributesToHighlight: [],
                 })
             }))
         } catch (error) {
