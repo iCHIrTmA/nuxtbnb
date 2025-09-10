@@ -21,9 +21,14 @@ export default {
             title: this.home.title,
         }
     },
-    async asyncData({ params, $dataApi }) {
-        const home = await $dataApi.getHome(params.id)
-        return { home }
+    async asyncData({ params, $dataApi, error }) {
+        const response = await $dataApi.getHome(params.id)
+        if (! response.ok) {
+            return error({ statusCode: response.status, message: response.statusText })
+        }
+        return {
+            home: response.json
+        }
     },
     mounted() {
         const loader = new Loader({
