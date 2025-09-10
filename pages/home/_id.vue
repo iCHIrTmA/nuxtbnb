@@ -35,24 +35,21 @@ export default {
         }
     },
     async asyncData({ params, $dataApi, error }) {
-        const homePropertyResponse = await $dataApi.getHome(params.id)
-        if (! homePropertyResponse.ok) {
-            return error({ statusCode: homePropertyResponse.status, message: homePropertyResponse.statusText })
+        const responses = await Promise.all([
+            $dataApi.getHome(params.id),
+            $dataApi.getReviewsByHomeId(params.id),
+            $dataApi.getUserByHomeId(params.id)
+        ])
+
+        const badResponse = responses.find((response) => !response.ok)
+        if (badResponse) {
+            return error({ statusCode: badResponse.status, message: badResponse.statusText })
         }
-        const guestReviewsResponse = await $dataApi.getReviewsByHomeId(params.id)
-        if (! guestReviewsResponse.ok) {
-            console.error(guestReviewsResponse)
-            return error({ statusCode: guestReviewsResponse.status, message: guestReviewsResponse.statusText })
-        }
-        const homePropertyOwnerResponse = await $dataApi.getUserByHomeId(params.id)
-        if (! homePropertyOwnerResponse.ok) {
-            console.error(guestReviewsResponse)
-            return error({ statusCode: homePropertyOwnerResponse.status, message: homePropertyOwnerResponse.statusText })
-        }
+
         return {
-            home: homePropertyResponse.json,
-            reviews: guestReviewsResponse.json.hits,
-            user: homePropertyOwnerResponse.json.hits[0],
+            home: responses[0].json,
+            reviews: responses[1].json.hits,
+            user: responses[2].json.hits[0],
         }
     },
     mounted() {
