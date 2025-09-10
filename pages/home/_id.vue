@@ -17,6 +17,12 @@
             <!-- {{ review.comment }} <br /> -->
             <short-text :text="review.comment" :target="150" /> <br />
         </div>
+
+        <img :src="user.image" /> <br />
+        {{ user.name }} <br />
+        {{ user.joined }} <br />
+        {{ user.reviewCount }} <br />
+        {{ user.description }} <br />
     </div>
 </template>
 
@@ -34,16 +40,19 @@ export default {
             return error({ statusCode: homePropertyResponse.status, message: homePropertyResponse.statusText })
         }
         const guestReviewsResponse = await $dataApi.getReviewsByHomeId(params.id)
-        console.log('asyncData', guestReviewsResponse);
-        console.log('asyncData', guestReviewsResponse.json);
-        console.log('asyncData', guestReviewsResponse.json.hits);
         if (! guestReviewsResponse.ok) {
             console.error(guestReviewsResponse)
             return error({ statusCode: guestReviewsResponse.status, message: guestReviewsResponse.statusText })
         }
+        const homePropertyOwnerResponse = await $dataApi.getUserByHomeId(params.id)
+        if (! homePropertyOwnerResponse.ok) {
+            console.error(guestReviewsResponse)
+            return error({ statusCode: homePropertyOwnerResponse.status, message: homePropertyOwnerResponse.statusText })
+        }
         return {
             home: homePropertyResponse.json,
             reviews: guestReviewsResponse.json.hits,
+            user: homePropertyOwnerResponse.json.hits[0],
         }
     },
     mounted() {
