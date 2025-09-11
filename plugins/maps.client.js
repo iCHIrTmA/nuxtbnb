@@ -34,7 +34,7 @@ export default function (context, inject) {
             });
     }
 
-    async function showMap(containerEl, lat, lng) {
+    async function showMap(containerEl, lat, lng, markers) {
         const loader = new Loader({
             apiKey: 'AIzaSyDCuFuuOfMuFiaH0cdSbjT-6YSrHpIyyVQ',
             version: 'weekly', // Or a specific version like '3.51'
@@ -53,10 +53,20 @@ export default function (context, inject) {
                 mapId: 'DEMO_MAP_ID',
             });
             // ... further map operations
-            const marker = new google.maps.marker.AdvancedMarkerElement({
-                map: map,
-                position: position,
-            });
+            if (! markers) {
+                new google.maps.marker.AdvancedMarkerElement({ map: map, position: position, });
+                return;
+            }
+
+            const bounds = new google.maps.LatLngBounds()
+            markers.forEach((property) => {
+                const position = new google.maps.LatLng(property.lat, property.lng);
+                new google.maps.marker.AdvancedMarkerElement({ map: map, position: position, });
+                bounds.extend(position)
+            })
+
+            map.fitBounds(bounds);
+            
             }).catch(error => {
             console.error("Error loading Google Maps API:", error);
             });

@@ -2,8 +2,10 @@
     <div>
         {{ lat }} / {{ lng }} / {{ label }} <br />
         <div style="height:800px;width:800px;float:right;" ref="map"></div>
-        <div v-if="homes.length > 0">
-            <home-row v-for="home in homes" :key="home.objectID" :home="home" />
+        <div v-if="homes.length">
+            <nuxt-link v-for="home in homes" :key="home.objectID" :to="`home/${home.objectID}`">
+                <home-row :home="home" />
+            </nuxt-link>
         </div>
         <div v-if="homes.length === 0">
             No results found
@@ -23,7 +25,10 @@ export default {
     },
     methods: {
         updateMap() {
-            this.$maps.showMap(this.$refs.map, this.lat, this.lng)
+            this.$maps.showMap(this.$refs.map, this.lat, this.lng, this.getHomeMarkers())
+        },
+        getHomeMarkers() {
+            return this.homes.map((property) => { return { ...property._geoloc }})
         }
     },
     async beforeRouteUpdate(to, from, next) {
