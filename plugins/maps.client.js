@@ -51,6 +51,11 @@ export default function (context, inject) {
                 center: position,
                 zoom: 18,
                 mapId: 'DEMO_MAP_ID',
+                styles: [{
+                    featureType: 'poi.business',
+                    elementType: 'labels.icon',
+                    stylers: [{visibility: 'off'}]
+                }],
             });
             // ... further map operations
             if (! markers) {
