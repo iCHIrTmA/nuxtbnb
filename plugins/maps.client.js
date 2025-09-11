@@ -10,6 +10,7 @@ export default function (context, inject) {
 
     inject('maps', {
         makeAutoComplete,
+        showMap,
     })
 
     async function makeAutoComplete(input) {
@@ -30,6 +31,34 @@ export default function (context, inject) {
                 })
             }).catch(error => {
                 console.error("Error loading Google Maps API:", error);
+            });
+    }
+
+    async function showMap(containerEl, lat, lng) {
+        const loader = new Loader({
+            apiKey: 'AIzaSyDCuFuuOfMuFiaH0cdSbjT-6YSrHpIyyVQ',
+            version: 'weekly', // Or a specific version like '3.51'
+            libraries: ['places', 'marker'] // Add any necessary libraries
+            });
+
+        loader.load()
+            .then(() => {
+            console.log(lat)
+            console.log(lng)
+            // Now google.maps is available
+            const position = { lat: lat, lng: lng }
+            const map = new google.maps.Map(containerEl, {
+                center: position,
+                zoom: 18,
+                mapId: 'DEMO_MAP_ID',
+            });
+            // ... further map operations
+            const marker = new google.maps.marker.AdvancedMarkerElement({
+                map: map,
+                position: position,
+            });
+            }).catch(error => {
+            console.error("Error loading Google Maps API:", error);
             });
     }
 }
