@@ -61,7 +61,20 @@ export default function (context, inject) {
             const bounds = new google.maps.LatLngBounds()
             markers.forEach((property) => {
                 const position = new google.maps.LatLng(property.lat, property.lng);
-                new google.maps.marker.AdvancedMarkerElement({ map: map, position: position, });
+
+                const pinTextGlyph = new google.maps.marker.PinElement({
+                    glyph: `$${property.pricePerNight}`,
+                    glyphColor: 'black',
+                    background: 'white',
+                    borderColor: 'lightgray',
+                });
+
+                new google.maps.marker.AdvancedMarkerElement({
+                    map: map,
+                    position: position,
+                    content: 'https://maps.gstatic.com/mapfiles/transparent.png',
+                    content: pinTextGlyph.element,
+                });
                 bounds.extend(position)
             })
 

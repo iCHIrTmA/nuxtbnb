@@ -28,7 +28,7 @@ export default {
             this.$maps.showMap(this.$refs.map, this.lat, this.lng, this.getHomeMarkers())
         },
         getHomeMarkers() {
-            return this.homes.map((property) => { return { ...property._geoloc }})
+            return this.homes.map((property) => { return { ...property._geoloc, pricePerNight: property.pricePerNight }})
         }
     },
     async beforeRouteUpdate(to, from, next) {
@@ -52,3 +52,13 @@ export default {
     }
 }
 </script>
+
+<style>
+.marker {
+    background-color: white;
+    border: 1px solid lightgray;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 5px 8px;
+}
+</style>
