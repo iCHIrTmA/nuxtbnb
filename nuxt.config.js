@@ -15,5 +15,5 @@ export default {
     router: {
         prefetchLinks: false,
     },
-    plugins: [ '~/plugins/dataApi'],
+    plugins: [ '~/plugins/dataApi', '~/plugins/maps.client'],
 }

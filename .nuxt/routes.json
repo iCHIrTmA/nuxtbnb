@@ -1,5 +1,11 @@
 [
   {
+    "name": "search",
+    "path": "/search",
+    "component": "/Users/janroe.cordero/Developer/nuxt-mastery/nuxtbnb/pages/search.vue",
+    "chunkName": "pages/search"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/Users/janroe.cordero/Developer/nuxt-mastery/nuxtbnb/pages/index.vue",
