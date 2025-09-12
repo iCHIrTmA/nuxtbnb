@@ -19,4 +19,11 @@ export default {
     // modules: [ '~/modules/test', { message: 'my module!!!!'}],
     modules: [],
     buildModules: ['@nuxtjs/tailwindcss'],
+    css: ['~/assets/sass/app.scss'],
+    build: {
+        extractCSS: true,
+        loaders: {
+            limit: 0,
+        }
+    }
 }
