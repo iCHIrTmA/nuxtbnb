@@ -1,5 +1,7 @@
 <template v-if="Object.keys(home).length && Object.keys(home.location).length">
-    <div>
+    <div class="app-container">
+        <PropertyGallery :images="home.images"/>
+        <PropertyDetails :home="home"/>
         <div style="display: flex;">
             <img v-for="image in home.images" :key="image" :src="image" width="200" height="150" />
         </div>
@@ -28,6 +30,7 @@
 
 <script>
 import { Loader } from '@googlemaps/js-api-loader';
+
 export default {
     head() {
         return {
