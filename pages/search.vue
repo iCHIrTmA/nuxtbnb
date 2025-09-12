@@ -1,14 +1,15 @@
 <template>
-    <div>
-        {{ lat }} / {{ lng }} / {{ label }} <br />
-        <div style="height:800px;width:800px;float:right;" ref="map"></div>
-        <div v-if="homes.length">
-            <nuxt-link v-for="home in homes" :key="home.objectID" :to="`home/${home.objectID}`">
-                <home-row :home="home" />
-            </nuxt-link>
-        </div>
-        <div v-if="homes.length === 0">
-            No results found
+    <div class="app-search-results-page">
+        <div class="app-search-results">
+            <div class="app-search-results-listing">
+                <h2 class="app-title">Stays in {{ label }}</h2>
+                <nuxt-link v-for="home in homes" :key="home.objectID" :to="`home/${home.objectID}`">
+                    <HomeRow class="app-house" :home="home"></HomeRow>
+                </nuxt-link>
+            </div>
+            <div class="app-search-results-map">
+                <div class="app-map" ref="map"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -28,6 +29,10 @@ export default {
             this.$maps.showMap(this.$refs.map, this.lat, this.lng, this.getHomeMarkers())
         },
         getHomeMarkers() {
+            if (this.homes.length === 0) {
+                return null;
+            }
+
             return this.homes.map((property) => { return { ...property._geoloc, pricePerNight: property.pricePerNight }})
         }
     },
