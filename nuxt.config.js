@@ -16,4 +16,6 @@ export default {
         prefetchLinks: false,
     },
     plugins: [ '~/plugins/dataApi', '~/plugins/maps.client'],
+    // modules: [ '~/modules/test', { message: 'my module!!!!'}],
+    modules: [['~/modules/test', { message: 'my module!!!!'}]],
 }
