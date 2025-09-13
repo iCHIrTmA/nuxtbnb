@@ -15,7 +15,18 @@
             <div class="app-user-menu">
                 <img src="/images/icons/house.svg" />
                 <div class="name">Host</div>
-                <img src="/images/user.jpg" class="avatar"/>
+                <script src="https://accounts.google.com/gsi/client" async defer></script>
+                <div id="googleButton">
+                    <div
+                        id="g_id_onload"
+                        :data-client_id="$config.auth.clientId"
+                        data-callback="auth">
+                    </div>
+                    
+                    <div class="g_id_signin" data-type="standard"></div>
+                </div>
+
+                <!-- <img src="/images/user.jpg" class="avatar"/> -->
             </div>
         </header>
         <nuxt />
@@ -24,7 +35,11 @@
 <script>
 export default {
     mounted() {
-        this.$maps.makeAutoComplete(this.$refs.citySearch)
+        this.$maps.makeAutoComplete(this.$refs.citySearch);
+        window.google.accounts.id.initialize({
+            client_id: this.googleClientId,
+            callback: this.handleCredentialResponse, // Reference the method
+        });
     },
     methods: {
         changed(event) {
@@ -41,7 +56,7 @@ export default {
                     label: this.$refs.citySearch.value
                 }
             })
-        }
+        },
     }
 }
 </script>

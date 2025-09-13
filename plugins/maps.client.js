@@ -14,8 +14,6 @@ export default function (context, inject) {
     })
 
     async function makeAutoComplete(input) {
-        console.log('hello from maps plugin')
-        console.log(input)
         const loader = new Loader({
             apiKey: 'AIzaSyDCuFuuOfMuFiaH0cdSbjT-6YSrHpIyyVQ',
             version: 'weekly', // Or a specific version like '3.51'
