@@ -16,8 +16,7 @@ export default {
         prefetchLinks: false,
     },
     plugins: [ '~/plugins/dataApi', '~/plugins/maps.client', '~/plugins/auth.client'],
-    // modules: [ '~/modules/test', { message: 'my module!!!!'}],
-    modules: [],
+    modules: ['~/modules/auth'],
     buildModules: ['@nuxtjs/tailwindcss'],
     css: ['~/assets/sass/app.scss'],
     build: {
