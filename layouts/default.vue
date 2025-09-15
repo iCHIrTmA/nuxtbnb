@@ -13,10 +13,13 @@
                 </button>
             </div>
             <div class="app-user-menu">
-                <img src="/images/icons/house.svg" />
-                <div class="name">Host</div>
-                <!-- <script src="https://accounts.google.com/gsi/client" async defer></script> -->
-                <div id="googleButton" class="ml-8">
+                <template v-if="isLoggedIn">
+                    <img src="/images/icons/house.svg" />
+                    <div class="name">Host</div>
+                    <img :src="user.profileUrl" class="avatar"/>
+                </template>
+                
+                <div v-if="!isLoggedIn" id="googleButton" class="ml-8">
                     <div
                         id="g_id_onload"
                         :data-client_id="$config.auth.clientId"
@@ -35,7 +38,6 @@
                     </div>
                 </div>
 
-                <!-- <img src="/images/user.jpg" class="avatar"/> -->
             </div>
         </header>
         <nuxt />
@@ -45,6 +47,14 @@
 export default {
     mounted() {
         this.$maps.makeAutoComplete(this.$refs.citySearch);
+    },
+    computed: {
+        user() {
+            return this.$store.state.auth.user;
+        },
+        isLoggedIn() {
+            return this.$store.state.auth.isLoggedIn;
+        }
     },
     methods: {
         changed(event) {

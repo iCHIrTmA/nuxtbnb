@@ -2,6 +2,8 @@
 ### NuxtJS generated dirs
 dist
 .nuxt
+.nuxt/
+.nuxt/*
 .nuxt-*
 .output
 .gen
