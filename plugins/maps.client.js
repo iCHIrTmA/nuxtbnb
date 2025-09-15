@@ -1,13 +1,6 @@
 import { Loader } from '@googlemaps/js-api-loader';
 
-export default function (context, inject) {
-    // const appId = 'EPZ034JVX7';
-    // const apiKey = '8ed129544e1d7cdd472c9f40ac2121ba';
-    // const headers = {
-    //     'X-Algolia-API-Key': apiKey,
-    //     'X-Algolia-Application-Id': appId,
-    // }
-
+export default function ({ $config }, inject) {
     inject('maps', {
         makeAutoComplete,
         showMap,
@@ -15,7 +8,7 @@ export default function (context, inject) {
 
     async function makeAutoComplete(input) {
         const loader = new Loader({
-            apiKey: 'AIzaSyDCuFuuOfMuFiaH0cdSbjT-6YSrHpIyyVQ',
+            apiKey: $config.maps.apiKey,
             version: 'weekly', // Or a specific version like '3.51'
             libraries: ['places', 'marker'] // Add any necessary libraries
             });
@@ -34,15 +27,13 @@ export default function (context, inject) {
 
     async function showMap(containerEl, lat, lng, markers) {
         const loader = new Loader({
-            apiKey: 'AIzaSyDCuFuuOfMuFiaH0cdSbjT-6YSrHpIyyVQ',
+            apiKey: $config.maps.apiKey,
             version: 'weekly', // Or a specific version like '3.51'
             libraries: ['places', 'marker'] // Add any necessary libraries
             });
 
         loader.load()
             .then(() => {
-            console.log(lat)
-            console.log(lng)
             // Now google.maps is available
             const position = { lat: lat, lng: lng }
             const map = new google.maps.Map(containerEl, {

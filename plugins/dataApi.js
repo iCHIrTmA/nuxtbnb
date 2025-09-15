@@ -1,6 +1,6 @@
-export default function (context, inject) {
+export default function ({ $config }, inject) {
     const appId = 'EPZ034JVX7';
-    const apiKey = '8ed129544e1d7cdd472c9f40ac2121ba';
+    const apiKey = $config.search.apiKey;
     const headers = {
         'X-Algolia-API-Key': apiKey,
         'X-Algolia-Application-Id': appId,
