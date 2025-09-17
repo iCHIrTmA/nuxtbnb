@@ -16,7 +16,7 @@ export default {
         prefetchLinks: false,
     },
     plugins: [ '~/plugins/dataApi', '~/plugins/maps.client', '~/plugins/auth.client'],
-    modules: ['~/modules/auth'],
+    modules: ['~/modules/auth', '~/modules/algolia'],
     buildModules: ['@nuxtjs/tailwindcss'],
     css: ['~/assets/sass/app.scss'],
     build: {
@@ -34,10 +34,14 @@ export default {
             apiKey: process.env.GOOGLE_MAPS_API
         },
         search: {
+            appId: process.env.ALGOLIA_APP_ID,
             apiKey: process.env.ALGOLIA_API
         }
     },
     privateRuntimeConfig: {
-
+        search: {
+            appId: process.env.ALGOLIA_APP_ID,
+            apiKey: process.env.ALGOLIA_API_CREATE_OBJECT
+        }
     }
 }

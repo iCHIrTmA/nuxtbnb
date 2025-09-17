@@ -14,9 +14,9 @@ export default function() {
             return rejectHit(res)
         }
 
-        console.log(req.originalUrl)
-        console.log(req.url)
-        console.log(idToken)
+        // console.log(req.originalUrl)
+        // console.log(req.url)
+        // console.log(idToken)
         const ticket = await getUser(idToken)
         if (!ticket) {
             return rejectHit(res)

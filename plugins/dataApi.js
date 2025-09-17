@@ -1,5 +1,7 @@
+import { unWrap, getErrorResponse } from '~/utils/fetch'
+
 export default function ({ $config }, inject) {
-    const appId = 'EPZ034JVX7';
+    const appId = $config.search.appId;
     const apiKey = $config.search.apiKey;
     const headers = {
         'X-Algolia-API-Key': apiKey,
@@ -69,26 +71,6 @@ export default function ({ $config }, inject) {
         } catch (error) {
             console.error(error)
             return getErrorResponse(error)
-        }
-    }
-
-    async function unWrap(response) {
-        const json = await response.json()
-        const { ok, status, statusText } = response
-        return {
-            json,
-            ok,
-            status,
-            statusText,
-        }
-    }
-
-    function getErrorResponse(error) {
-        return {
-            ok: false,
-            status: 500,
-            statusText: error.message,
-            json: {}
         }
     }
 }
