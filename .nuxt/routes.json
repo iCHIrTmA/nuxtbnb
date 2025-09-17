@@ -16,6 +16,13 @@
     "_name": "_3326a12a"
   },
   {
+    "name": "no-access",
+    "path": "/no-access",
+    "component": "/Users/janroe.cordero/Developer/nuxt-mastery/nuxtbnb/pages/no-access.vue",
+    "chunkName": "pages/no-access",
+    "_name": "_a9efcee8"
+  },
+  {
     "name": "search",
     "path": "/search",
     "component": "/Users/janroe.cordero/Developer/nuxt-mastery/nuxtbnb/pages/search.vue",
