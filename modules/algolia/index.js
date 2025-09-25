@@ -1,5 +1,6 @@
-import getApis from './apis'
+import bodyParser from 'body-parser'
 import userRouter from './routers/user'
+import getApis from './apis'
 
 export default function() {
     const algoliaConfig = this.options.privateRuntimeConfig.search
@@ -7,6 +8,7 @@ export default function() {
     console.log('algolia index.js', apis)
 
     this.nuxt.hook('render:setupMiddleware', (app) => {
+        app.use(bodyParser.urlencoded())
         app.use('/api/user', userRouter(apis))
     })
 }
