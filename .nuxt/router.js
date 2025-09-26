@@ -5,7 +5,7 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _3326a12a = () => interopDefault(import('../pages/admin.vue' /* webpackChunkName: "pages/admin" */))
-const _283ace66 = () => interopDefault(import('../pages/admin/test.vue' /* webpackChunkName: "pages/admin/test" */))
+const _b139d160 = () => interopDefault(import('../pages/admin/homes.vue' /* webpackChunkName: "pages/admin/homes" */))
 const _a9efcee8 = () => interopDefault(import('../pages/no-access.vue' /* webpackChunkName: "pages/no-access" */))
 const _d3262888 = () => interopDefault(import('../pages/search.vue' /* webpackChunkName: "pages/search" */))
 const _96054924 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
@@ -27,9 +27,9 @@ export const routerOptions = {
     component: _3326a12a,
     name: "admin",
     children: [{
-      path: "test",
-      component: _283ace66,
-      name: "admin-test"
+      path: "homes",
+      component: _b139d160,
+      name: "admin-homes"
     }]
   }, {
     path: "/no-access",
