@@ -16,7 +16,7 @@ export default {
         prefetchLinks: false,
     },
     plugins: [ '~/plugins/dataApi', '~/plugins/maps.client', '~/plugins/auth.client'],
-    modules: ['~/modules/auth', '~/modules/algolia'],
+    modules: ['~/modules/auth', '~/modules/algolia', '~/modules/cloudinary'],
     buildModules: ['@nuxtjs/tailwindcss'],
     serverMiddleware: [
         function(req, res, next) {
@@ -48,6 +48,9 @@ export default {
         search: {
             appId: process.env.ALGOLIA_APP_ID,
             apiKey: process.env.ALGOLIA_API_CREATE_OBJECT
-        }
+        },
+        cloudinary: {
+            apiSecret: process.env.CLOUDINARY_API_SECRET
+        },
     }
 }
