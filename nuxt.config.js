@@ -16,8 +16,11 @@ export default {
         prefetchLinks: false,
     },
     plugins: [ '~/plugins/dataApi', '~/plugins/maps.client', '~/plugins/auth.client'],
-    modules: ['~/modules/auth', '~/modules/algolia', '~/modules/cloudinary'],
+    modules: ['~/modules/auth', '~/modules/algolia', '~/modules/cloudinary', '@nuxtjs/cloudinary'],
     buildModules: ['@nuxtjs/tailwindcss'],
+    cloudinary: {
+        cloudName: 'droqe6hdx',
+    },
     serverMiddleware: [
         function(req, res, next) {
             console.log(req.body)
@@ -42,7 +45,10 @@ export default {
         search: {
             appId: process.env.ALGOLIA_APP_ID,
             apiKey: process.env.ALGOLIA_API
-        }
+        },
+        cloudinary: {
+            apiKey: process.env.CLOUDINARY_API_KEY
+        },
     },
     privateRuntimeConfig: {
         search: {
