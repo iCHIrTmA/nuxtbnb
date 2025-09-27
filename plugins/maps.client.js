@@ -6,7 +6,7 @@ export default function ({ $config }, inject) {
         showMap,
     })
 
-    async function makeAutoComplete(input) {
+    async function makeAutoComplete(input, types = ['(cities)']) {
         const loader = new Loader({
             apiKey: $config.maps.apiKey,
             version: 'weekly', // Or a specific version like '3.51'
@@ -15,7 +15,7 @@ export default function ({ $config }, inject) {
 
         loader.load()
             .then(() => {
-                const autoComplete = new google.maps.places.Autocomplete(input, { types: ['(cities)'] });
+                const autoComplete = new google.maps.places.Autocomplete(input, { types: types });
                 autoComplete.addListener('place_changed', () => {
                     const place = autoComplete.getPlace();
                     input.dispatchEvent(new CustomEvent('changed', { detail: place }))
